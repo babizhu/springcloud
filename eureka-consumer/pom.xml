@@ -12,8 +12,8 @@
     <description>Demo project for Spring Boot</description>
 
     <parent>
-        <artifactId>springcloud</artifactId>
-        <groupId>com.bbz.learn</groupId>
+        <artifactId>main</artifactId>
+        <groupId>com.bbz.learn.spring</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
