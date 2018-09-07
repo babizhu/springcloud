@@ -14,7 +14,7 @@
         <module>eureka-client</module>
         <module>eureka-consumer</module>
         <module>user_module</module>
-        <!--<module>demo-clent1</module>-->
+        <module>misc_code</module>
     </modules>
 
     <parent>

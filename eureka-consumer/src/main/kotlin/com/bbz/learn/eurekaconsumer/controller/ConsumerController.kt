@@ -2,7 +2,8 @@ package com.bbz.learn.eurekaconsumer.controller
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.PathVariable
-import com.bbz.learn.eurekaconsumer.service.HelloRemote
+//import com.bbz.learn.eurekaconsumer.service.HelloRemote
+import com.bbz.learn.eurekaconsumer.service.HelloRemoteService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RestController
 
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController
 class ConsumerController {
 
     @Autowired
-    internal var helloRemote: HelloRemote? = null
+//    internal var helloRemote: HelloRemote? = null
+    lateinit var helloRemoteService: HelloRemoteService
 
     /*
         消费者的接口，去调用服务提供者
@@ -19,7 +21,7 @@ class ConsumerController {
      */
     @RequestMapping("/consumerHello/{name}")
     fun index(@PathVariable("name") name: String): String {
-        return helloRemote!!.sayHello(name)
+        return helloRemoteService.sayHello(name)
     }
 
     //有问题的
