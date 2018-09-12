@@ -9,7 +9,7 @@ import kotlin.collections.ArrayList
  * wait notify使用
  * 创建两个线程，让这两个线程交替执行某个操作
  */
-private const val COUNT = 10
+private const val COUNT = 10000
 
 class WaitNotify {
     private val lock = java.lang.Object()
@@ -25,14 +25,13 @@ class WaitNotify {
                 synchronized(lock) {
 
                     while (currentIndex < data.size) {
-                        if (list.size % 2 == 0) {
-                            list.add(data[currentIndex])
-                            println("${Thread.currentThread().name} 插入${data[currentIndex]}完毕")
-                            lock.notify()
-                            currentIndex++
-                        } else {
+                        while (list.size % 2 != 0) {
                             lock.wait()
                         }
+                        list.add(data[currentIndex])
+                        println("${Thread.currentThread().name} 插入${data[currentIndex]}完毕")
+                        lock.notify()
+                        currentIndex++
                     }
                 }
             }
@@ -45,14 +44,13 @@ class WaitNotify {
                 synchronized(lock) {
 
                     while (currentIndex < data.size) {
-                        if (list.size % 2 == 1) {
-                            list.add(data[list.size / 2])
-                            println("${Thread.currentThread().name} 插入${data[currentIndex]}完毕")
-                            lock.notify()
-                            currentIndex++
-                        } else {
+                        while (list.size % 2 != 1) {
                             lock.wait()
                         }
+                        list.add(data[list.size / 2])
+                        println("${Thread.currentThread().name} 插入${data[currentIndex]}完毕")
+                        lock.notify()
+                        currentIndex++
                     }
                 }
             }
@@ -72,7 +70,7 @@ class WaitNotify {
 }
 
 fun main(args: Array<String>) {
-    repeat(1) {
+    repeat(10) {
         WaitNotify().run()
     }
 //    val data = ArrayList(listOf("1", "3", "5", "7", "9"))
