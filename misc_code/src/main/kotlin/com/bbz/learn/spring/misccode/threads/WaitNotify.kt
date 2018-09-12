@@ -9,7 +9,7 @@ import kotlin.collections.ArrayList
  * wait notify使用
  * 创建两个线程，让这两个线程交替执行某个操作
  */
-private const val COUNT = 10000
+private const val COUNT = 10
 
 class WaitNotify {
     private val lock = java.lang.Object()
@@ -21,8 +21,8 @@ class WaitNotify {
             val data = Array(COUNT) { i: Int -> "${i * 2}" }
 
             override fun run() {
+                var currentIndex = 0
                 synchronized(lock) {
-                    var currentIndex = 0
 
                     while (currentIndex < data.size) {
                         if (list.size % 2 == 0) {
@@ -41,8 +41,8 @@ class WaitNotify {
 
             val data = Array(COUNT) { i: Int -> "${i * 2 + 1}" }
             override fun run() {
+                var currentIndex = 0
                 synchronized(lock) {
-                    var currentIndex = 0
 
                     while (currentIndex < data.size) {
                         if (list.size % 2 == 1) {
@@ -72,7 +72,7 @@ class WaitNotify {
 }
 
 fun main(args: Array<String>) {
-    repeat(100) {
+    repeat(1) {
         WaitNotify().run()
     }
 //    val data = ArrayList(listOf("1", "3", "5", "7", "9"))
